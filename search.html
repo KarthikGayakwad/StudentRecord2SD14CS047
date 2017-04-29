@@ -1,0 +1,34 @@
+<html>
+<body>
+<script language="javascript">
+/*eslint-env browser */
+function validate(){
+var usnstr = document.getElementById("usn");
+ if(usnstr.value !== "") //control validation
+ {
+  //data validation goes here using reg-ex for 2SD**CS*** pettern
+  
+  var xmlobj = new XMLHttpRequest();
+  var url="/search.php?usn=" + usnstr.value;
+  xmlobj.open("GET", url, true);
+  xmlobj.send(null);
+  
+  xmlobj.onreadystatechange = function(){
+  	if(xmlobj.readyState===4)
+  	{
+  		document.getElementById("result").innerText = xmlobj.responseText;
+  	}
+  };
+ }
+}
+</script>
+<form>
+<center>
+Enter USN to search <input type="text" id="usn"> 
+<input type="button" value="Search" onclick="validate();" name="btn">
+<p id="result"></p>
+<a href="index.php">Home Page</a>
+</center>
+</form>
+</body>
+</html>
